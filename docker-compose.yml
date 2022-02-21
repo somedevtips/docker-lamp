@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  phpapache:
+    build:
+      dockerfile: config/docker/Dockerfile
+      context: .
+      args:
+        HOST_USER_NAME: ${HOST_USER_NAME}
+        HOST_USER_ID: ${HOST_USER_ID}
+        HOST_GROUP_NAME: ${HOST_GROUP_NAME}
+        HOST_GROUP_ID: ${HOST_GROUP_ID}
+    volumes:
+      - "./site/:/var/www/html/"
+      - "./config/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf"
+    ports:
+      - "80:80"
+
+  dbserver:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.0.1
+    environment:
+      PMA_HOST: dbserver
+      PMA_USER: root
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - dbserver
+    ports:
+      - "5000:80"
+
+volumes:
+  mysql-data:
