@@ -28,3 +28,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
     && php wp-cli.phar --info \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp
+
+# xdebug and mod_rewrite enable
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN a2enmod rewrite

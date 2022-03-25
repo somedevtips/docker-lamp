@@ -1,4 +1,5 @@
 # Docker lamp
+LAMP stack with phpMyAdmin, Mailhog (for e-mail debugging), composer version 2 and WP CLI.
 
 ## Tools
 ### phpMyAdmin
