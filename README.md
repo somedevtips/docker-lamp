@@ -6,6 +6,25 @@ LAMP stack with phpMyAdmin, Mailhog (for e-mail debugging), composer version
 The website must be installed in the `site` directory, the `site/public`
 directory is the public directory.
 
+### WordPress installation
+If your website is a WordPress site, you can install it with the 
+following procedure:
+```bash
+cd site/public
+wget http://wordpress.org/latest.tar.gz
+tar xfz latest.tar.gz --strip 1
+rm -f latest.tar.gz
+```
+Then: 
+1. open phpMyAdmin at [http://localhost:5000/](http://localhost:5000/) 
+2. create a new database
+3. run the WordPress installation from [http://localhost/](http://localhost/) 
+4. set  
+DB host = `dbserver`  
+DB user = `root`  
+DB password =  password defined in the `.env` file.  
+DB name = name of the database created at step 2
+
 ## Tools
 ### phpMyAdmin
 [http://localhost:5000/](http://localhost:5000/)
