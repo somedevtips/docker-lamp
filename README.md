@@ -1,6 +1,21 @@
 # Docker LAMP
 LAMP stack with phpMyAdmin, Mailhog (for e-mail debugging), composer version
- 2, xdebug and WP CLI.
+ 2, xdebug, git and WP CLI.
+
+## Setup
+The following instructions are for the Linux operating system.  
+To start using this development environment you have to:  
+
+1. get the id, the group and the group id of your current Linux user, 
+for example if your current user is `giancarlo` the commands are:  
+get the user id: `id -u giancarlo`  
+get the group name: `id -gn giancarlo`  
+get the group id: `id -g giancarlo`  
+
+2. fill in the `.env` file with the information above
+3. change the MySql password in the `.env` file (optional)
+4. run the command `docker-compose up -d` to have the docker images 
+built and the containers running.
 
 ## Website installation
 The website must be installed in the `site` directory, the `site/public`
