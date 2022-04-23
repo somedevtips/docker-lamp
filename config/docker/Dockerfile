@@ -9,9 +9,9 @@ ARG HOST_GROUP_ID
 RUN groupadd -g "${HOST_GROUP_ID}" "${HOST_GROUP_NAME}" && \
     useradd -g ${HOST_GROUP_ID} -u ${HOST_USER_ID} -m ${HOST_USER_NAME}
 
-# Apache runs in the container with the user www-data, add this user to the host group to grant him write permissions
-RUN usermod -a -G "${HOST_GROUP_ID}" www-data
-RUN usermod -a -G www-data "${HOST_USER_NAME}"
+# Change running user of Apache to host user and group to avoid permission problems (Apache default is www-data)
+ENV APACHE_RUN_USER=${HOST_USER_NAME}
+ENV APACHE_RUN_GROUP=${HOST_GROUP_NAME}
 
 # Common tools
 RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
