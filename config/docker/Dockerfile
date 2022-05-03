@@ -15,7 +15,7 @@ ENV APACHE_RUN_GROUP=${HOST_GROUP_NAME}
 
 # Common tools
 RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
-    git nano less wget \
+    git nano less wget zip unzip \
 	&& docker-php-ext-install mysqli pdo pdo_mysql \
     && rm -rf /var/lib/apt/lists/*
 
